@@ -4,7 +4,12 @@
 //base
 @import './reset';
 //component
+@import './components/popupModal';
 //layout
+@import './template/homeTemplate';
+@import './template/userLoginTemplate';
 //page
+@import './page/projectDetail.scss';
+@import './page/login';
+@import './page//register';
 // theme
-@import './homeTemplate';

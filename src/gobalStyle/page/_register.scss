@@ -1,0 +1,91 @@
+.register {
+    height: 100%;
+
+    .register__content {
+        width: 80%;
+        margin: 0 auto;
+
+        .register__content-heading {
+            font-size: 35px;
+            text-align: center;
+            padding: 10px;
+            font-weight: 900;
+            color: $blue;
+        }
+
+        .register__content-item {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 10px;
+            font-size: 14px;
+
+            p {
+                color: red;
+                margin-top: 10px;
+
+            }
+
+            label {
+                color: $blue;
+                font-size: 16px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+
+            input {
+                margin-top: 10px;
+                width: 100%;
+                font-size: 16px;
+                border: none;
+                border-bottom: 1px solid $blue;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+
+        .register__content-btn {
+            margin: 20px auto;
+            width: 100%;
+
+            button {
+                background-color: $blue;
+                width: 100%;
+                height: 40px;
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: $smooth;
+
+                &:hover {
+                    opacity: 0.8;
+                    transition: $smooth;
+                }
+            }
+        }
+
+        .register__content-signIn {
+            display: flex;
+            justify-content: center;
+
+            p {
+                // width: 70%;
+            }
+
+            button {
+                // width: 30%;
+                color: $blue;
+                text-decoration: underline;
+                border: none;
+                margin-left: 10px;
+                background-color: transparent;
+                cursor: pointer;
+                font-size: 16px;
+            }
+        }
+
+    }
+}

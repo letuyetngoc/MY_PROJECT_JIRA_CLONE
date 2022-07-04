@@ -1,0 +1,21 @@
+.popupModal {
+    position: relative;
+    z-index: 110;
+    min-height: 100%;
+    background-color: rgba(9, 30, 66, 0.54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px;
+
+    .popupModal__content {
+        position: absolute;
+        z-index: 111;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        max-width: 1040px;
+        box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
+        border-radius: 3px;
+    }
+}

@@ -1,0 +1,32 @@
+.userLoginTemplate {
+    background-color: $light-gray;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+
+    .userLoginTemplate__right {
+        display: flex;
+        align-items: center;
+
+        width: 50%;
+        background-color: $blue;
+        border-radius: 0 5px 5px 0;
+        box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
+        text-align: center;
+
+        @include Responesive(MD) {
+            display: none;
+        }
+    }
+
+    .userLoginTemplate__left {
+        width: 50%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px 0 0 5px;
+        box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
+
+        @include Responesive(MD) {
+            width: 100%;
+        }
+    }
+}
