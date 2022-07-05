@@ -6,6 +6,7 @@ $text-active: rgb(0, 82, 204);
 $white: rgb(222, 235, 255);
 $smooth: all 0.2s ease-in;
 // responsive
+$SS: 280px;
 $XS: 480px;
 $SM: 576px;
 $MD: 768px;
@@ -13,6 +14,12 @@ $LG: 900px;
 $XL: 1200px;
 
 @mixin Responesive($canvas) {
+    @if $canvas ==SS {
+        @media only screen and (max-width: $SS) {
+            @content;
+        }
+    }
+
     @if $canvas ==XS {
         @media only screen and (max-width: $XS) {
             @content;

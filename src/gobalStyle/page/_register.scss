@@ -14,6 +14,7 @@
         }
 
         .register__content-item {
+            position: relative;
             width: 100%;
             margin: 0 auto;
             margin-top: 10px;
@@ -42,6 +43,15 @@
                 &:focus-visible {
                     outline: none;
                 }
+            }
+
+            .eye_password {
+                position: absolute;
+                right: 20px;
+                top: 28px;
+                color: $blue;
+                font-size: 18px;
+                cursor: pointer;
             }
         }
 

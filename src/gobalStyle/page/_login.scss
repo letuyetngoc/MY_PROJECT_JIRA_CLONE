@@ -8,6 +8,7 @@
     }
 
     .login__content {
+
         hr {
             width: 80%;
             margin: 0 auto;
@@ -16,6 +17,7 @@
         }
 
         .login__content-item {
+            position: relative;
             display: flex;
             align-items: center;
 
@@ -33,12 +35,20 @@
             input {
                 border: none;
                 font-size: 16px;
+                width: 60%;
 
                 &:focus-visible {
                     outline: none;
                 }
             }
 
+            .eye_password {
+                position: absolute;
+                right: 20px;
+                color: $blue;
+                font-size: 18px;
+                cursor: pointer;
+            }
 
         }
 

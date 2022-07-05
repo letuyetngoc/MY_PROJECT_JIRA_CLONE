@@ -12,7 +12,7 @@ export default function UserLoginTemplate(props) {
                 <div className='userLoginTemplate__right'>
                     <img
                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="w-full"
+                        className="w-full"
                         alt="Sample image"
                     />
                 </div>

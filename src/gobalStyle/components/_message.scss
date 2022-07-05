@@ -1,0 +1,57 @@
+.message {
+    background-color: $light-gray;
+    width: 300px;
+    height: 80px;
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
+    animation-name: message;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+
+    @include Responesive(SS) {
+        width: 260px;
+    }
+
+    .message__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+
+        @include Responesive(SS) {
+            font-size: 13px;
+        }
+
+        .message__content-btn {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            color: rgb(177, 172, 172);
+            background-color: transarent;
+            cursor: pointer;
+
+            :hover {
+                color: $blue;
+            }
+        }
+    }
+}
+
+@keyframes message {
+    0% {
+        display: none;
+        top: -80px;
+    }
+
+    100% {
+        display: initial;
+        top: 8px;
+    }
+}

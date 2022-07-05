@@ -12,7 +12,6 @@ export default function HomeTemplate(props) {
     const { Component, ...restProps } = props
 
     const navContentItem1 = useRef()
-    console.log(navContentItem1.current)
     const navContentItem2 = useRef()
 
     return (
