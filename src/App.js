@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       {/* <PopupModal /> */}
-      {/* <Message /> */}
+      <Message />
       <Router history={history}>
         <Switch>
           <HomeTemplate path='/home' exact Component={Home} />

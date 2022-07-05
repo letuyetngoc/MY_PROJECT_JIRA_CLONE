@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { history } from '../../App';
 import { SIGN_IN_API } from '../../redux/saga/typesSaga/UserTypesSaga';
-import Message from '../../component/message/Message';
 import { MESSAGE_APPEAR } from '../../redux/types/UserTypes';
 // react icon
 import { MdEmail } from 'react-icons/md';
@@ -15,7 +14,6 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai';
 export default function Login() {
 
     const { userLogin } = useSelector(state => state.UserReducer)
-    const { isMessage } = useSelector(state => state.MessageReducer)
     const dispatch = useDispatch()
 
     const [state, setState] = useState({
@@ -32,7 +30,7 @@ export default function Login() {
         e.preventDefault()
         const { values } = state
         if (values.email === '' || values.passWord === '') {
-            dispatch({ type: MESSAGE_APPEAR })
+            dispatch({ type: MESSAGE_APPEAR, payload: <p>Vui lòng nhập email và mật khẩu!</p> })
         } else {
             dispatch({ type: SIGN_IN_API, payload: values })
         }
@@ -56,9 +54,6 @@ export default function Login() {
 
     return (
         <div className='login'>
-            {isMessage && <Message>
-                <p>Tài khoản hoặc mật khẩu không đúng!</p>
-            </Message>}
             <div className='login__heading'>Login</div>
             <form onSubmit={handleSubmit} className='login__content'>
                 <div className='login__content-item'>

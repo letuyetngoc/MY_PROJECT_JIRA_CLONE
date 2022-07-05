@@ -5,6 +5,7 @@
     position: fixed;
     top: 8px;
     left: 50%;
+    z-index: 1000;
     transform: translateX(-50%);
     border-radius: 5px;
     box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;

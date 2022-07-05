@@ -4,6 +4,8 @@ import { history } from '../../App'
 
 import { AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { SIGN_UP_API } from '../../redux/saga/typesSaga/UserTypesSaga';
+import { MESSAGE_APPEAR } from '../../redux/types/UserTypes';
 
 export default function Register() {
 
@@ -76,7 +78,26 @@ export default function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(state.values)
+        const { errors, values } = state
+
+        for (let value in values) {
+            if (values[value] === '') {
+                dispatch({ type: MESSAGE_APPEAR, payload: <p>Bạn chưa điền đủ thông tin!</p> })
+                return
+            }
+        }
+
+        for (let error in errors) {
+            if (errors[error] !== '') {
+                dispatch({ type: MESSAGE_APPEAR, payload: <p>Thông tin không hợp lệ!</p> })
+                return
+            }
+        }
+
+        dispatch({
+            type: SIGN_UP_API,
+            payload: state.values
+        })
     }
 
     const passWordTag = useRef()

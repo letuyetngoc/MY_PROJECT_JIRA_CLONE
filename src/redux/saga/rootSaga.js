@@ -18,5 +18,6 @@ sagaMiddleware.run(rootSaga)
 function* rootSaga() {
     yield all([
         userSaga.folowSignIn(),
+        userSaga.followSignUp()
     ])
 }

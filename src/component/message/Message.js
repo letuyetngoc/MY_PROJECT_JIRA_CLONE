@@ -1,16 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MESSAGE_DISAPPEAR } from '../../redux/types/UserTypes';
-export default function Message({ children }) {
+export default function Message() {
     const dispatch = useDispatch()
+    const { isMessage, Component } = useSelector(state => state.MessageReducer)
     return (
-        <div className='message'>
+        isMessage && <div className='message'>
             < div className='message__content' >
                 <div onClick={() => dispatch({ type: MESSAGE_DISAPPEAR })} className='message__content-btn'>
                     <AiOutlineClose />
                 </div>
-                {children}
+                {Component}
             </div >
         </div >
     )
