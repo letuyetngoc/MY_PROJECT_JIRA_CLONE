@@ -1,6 +1,10 @@
 .hometemplate {
     padding: 25px 32px 50px 334px;
 
+    @include Responesive(LG) {
+        padding-left: 84px;
+    }
+
     .hometemplate__nav {
         position: fixed;
         z-index: 100;
@@ -87,6 +91,10 @@
         width: 230px;
         height: 100vh;
         background-color: $light-gray;
+
+        @include Responesive(LG) {
+            display: none;
+        }
 
         .homeTemplate__navContent-header {
             display: flex;

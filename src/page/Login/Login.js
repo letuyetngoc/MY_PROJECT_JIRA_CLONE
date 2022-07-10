@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { history } from '../../App';
 import { SIGN_IN_API } from '../../redux/saga/typesSaga/UserTypesSaga';
-import { MESSAGE_APPEAR } from '../../redux/types/UserTypes';
+import { MESSAGE_APPEAR } from '../../redux/types/MessageTypes';
 // react icon
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -23,6 +23,7 @@ export default function Login() {
         },
 
     })
+
     const [isPassword, setIsPassword] = useState(false)
     const [typeInput, setTypeInput] = useState('password')
 
@@ -45,6 +46,7 @@ export default function Login() {
     }
 
     const inputPassword = useRef()
+
     const handleShowPassword = (e) => {
         const { type } = inputPassword.current
         setIsPassword(!isPassword)

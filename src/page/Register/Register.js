@@ -5,7 +5,7 @@ import { history } from '../../App'
 import { AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { SIGN_UP_API } from '../../redux/saga/typesSaga/UserTypesSaga';
-import { MESSAGE_APPEAR } from '../../redux/types/UserTypes';
+import { MESSAGE_APPEAR } from '../../redux/types/MessageTypes';
 
 export default function Register() {
 
@@ -14,7 +14,8 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setshowConfirmPassword] = useState(false)
     const [typePassword, setTypePassword] = useState('password')
-    const [typeConfirmPassword, settypeConfirmPassword] = useState('password')
+    const [typeConfirmPassword, setTypeConfirmPassword] = useState('password')
+
     const [state, setState] = useState({
         values: {
             name: '',
@@ -39,6 +40,7 @@ export default function Register() {
         newValues[name] = value
 
         let errorMessage = ''
+
         let regexMail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         let regexPhoneNumber = /^[0-9\-\+]{10,11}$/i;
         let regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i;
@@ -113,7 +115,7 @@ export default function Register() {
         setshowConfirmPassword(!showConfirmPassword)
         let { type } = passWordConfirmTag.current
         const newType = type === 'password' ? 'text' : 'password'
-        settypeConfirmPassword(newType)
+        setTypeConfirmPassword(newType)
     }
 
     return (

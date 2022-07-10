@@ -1,0 +1,28 @@
+.menuItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: $gray;
+    cursor: pointer;
+    transition: $smooth;
+
+    &:hover {
+        background-color: rgb(235, 236, 240);
+        transition: $smooth;
+    }
+
+    .icon {
+        font-size: 20px;
+        margin-right: 15px;
+    }
+
+    div {
+        font-size: 14.7px;
+        font-weight: 400;
+    }
+}
+
+.menuItem.active {
+    background-color: rgb(235, 236, 240);
+    color: $text-active;
+}

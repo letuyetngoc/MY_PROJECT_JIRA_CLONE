@@ -1,18 +1,14 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 // icon react
 import { AiOutlineHome } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsQuestionCircle } from "react-icons/bs";
-import { AiOutlineSetting } from "react-icons/ai";
-import { FiClipboard } from "react-icons/fi";
+import MenuItem from '../component/menu/MenuItem';
 
 export default function HomeTemplate(props) {
     const { Component, ...restProps } = props
-
-    const navContentItem1 = useRef()
-    const navContentItem2 = useRef()
 
     return (
         <Route {...restProps} render={(propsRout) => {
@@ -45,24 +41,7 @@ export default function HomeTemplate(props) {
                                 <div>Software project</div>
                             </div>
                         </div>
-                        <div className='homeTemplate__navContent-item' ref={navContentItem1}
-                            onClick={() => {
-                                navContentItem1.current.classList.toggle('active')
-                                navContentItem2.current.classList.remove('active')
-                            }}
-                        >
-                            <FiClipboard className='icon' />
-                            <div>Kanban board</div>
-                        </div>
-                        <div className='homeTemplate__navContent-item' ref={navContentItem2}
-                            onClick={() => {
-                                navContentItem2.current.classList.toggle('active')
-                                navContentItem1.current.classList.remove('active')
-                            }}
-                        >
-                            <AiOutlineSetting className='icon' />
-                            <div>Project settings</div>
-                        </div>
+                        <MenuItem />
                     </div>
                     <div className='homeTemplate__content'>
                         <Component {...propsRout} />

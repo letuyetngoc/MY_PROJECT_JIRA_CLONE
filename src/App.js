@@ -7,13 +7,14 @@ import Login from "./page/Login/Login";
 import Register from "./page/Register/Register";
 import HomeTemplate from "./template/HomeTemplate";
 import UserLoginTemplate from "./template/UserLoginTemplate";
-
+import Loading from "./component/loading/Loading"
 export const history = createBrowserHistory();
 function App() {
   return (
     <>
       {/* <PopupModal /> */}
       <Message />
+      <Loading />
       <Router history={history}>
         <Switch>
           <HomeTemplate path='/home' exact Component={Home} />

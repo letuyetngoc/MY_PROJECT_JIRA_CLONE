@@ -1,5 +1,5 @@
 import React from 'react'
-import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../types/UserTypes"
+import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../types/MessageTypes"
 
 const stateDefault = {
     isMessage: false,

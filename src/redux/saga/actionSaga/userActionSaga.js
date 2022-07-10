@@ -2,13 +2,19 @@ import React from 'react'
 
 import { call, put, takeLatest, delay } from "redux-saga/effects"
 import { userService } from "../../../service/UserService"
-import { GET_USER_LOGIN, MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../../types/UserTypes"
+import { GET_USER_LOGIN } from "../../types/UserTypes"
 import { SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
 import { history } from '../../../App'
+import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from '../../types/MessageTypes'
+import { APPEAR_LOADING, HIDE_LOADING } from '../../types/LoadingTypes'
 
 function* signIn(action) {
     try {
+        yield put({ type: APPEAR_LOADING })
         let { status, data } = yield call(() => userService.signin(action.payload))
+        yield delay(500)
+        yield put({ type: HIDE_LOADING })
+
         if (status === 200) {
             yield put({
                 type: GET_USER_LOGIN,
@@ -18,6 +24,8 @@ function* signIn(action) {
         }
     } catch (error) {
         console.log('error', error)
+        yield delay(500)
+        yield put({ type: HIDE_LOADING })
         yield put({ type: MESSAGE_APPEAR, payload: <p>Email hoặc mật khẩu không đúng!</p> })
         yield delay(2000)
         yield put({ type: MESSAGE_DISAPPEAR })
@@ -30,7 +38,11 @@ export function* folowSignIn() {
 
 function* signup(action) {
     try {
+        yield put({ type: APPEAR_LOADING })
         let { status, data } = yield call(() => userService.signup(action.payload))
+        yield delay(500)
+        yield put({ type: HIDE_LOADING })
+
         if (data.statusCode === 200) {
             yield put({ type: MESSAGE_APPEAR, payload: <p>Tạo tài khoản thành công!</p> })
             yield delay(2000)
@@ -39,6 +51,8 @@ function* signup(action) {
         }
     } catch (error) {
         console.log('error', error)
+        yield delay(500)
+        yield put({ type: HIDE_LOADING })
         if (error.response.data.statusCode === 400) {
             yield put({ type: MESSAGE_APPEAR, payload: <p>{error.response.data.message}</p> })
             yield delay(2000)

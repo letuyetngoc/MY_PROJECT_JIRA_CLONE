@@ -1,0 +1,2 @@
+export const APPEAR_LOADING = 'APPEAR_LOADING'
+export const HIDE_LOADING = 'HIDE_LOADING'
