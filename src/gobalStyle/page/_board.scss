@@ -1,0 +1,190 @@
+.board {
+    .board__heading {
+        color: rgb(94, 108, 132);
+        font-size: 15px;
+
+        span {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+    }
+
+    .board__title {
+        margin-top: 6px;
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            font-size: 24px;
+            font-weight: 500;
+            color: rgb(23, 43, 77);
+        }
+
+        a {
+            font-size: 14.5px;
+            display: flex;
+            align-items: center;
+            background-color: $light-gray;
+            padding: 7px 12px;
+            border-radius: 3px;
+            transition: $smooth;
+
+            &:hover {
+                background-color: $gray-hover;
+                transition: $smooth;
+            }
+
+            span {
+                padding-left: 5px;
+            }
+
+            .icon {
+                font-size: 18px;
+            }
+        }
+
+    }
+
+    .board__tabNav {
+        margin-top: 24px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .board__tabNav-search {
+            display: flex;
+            width: 160px;
+            height: 32px;
+            position: relative;
+
+            margin-right: 18px;
+
+            .icon {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                color: rgb(94, 108, 132);
+
+            }
+
+            input {
+                height: 100%;
+                width: 100%;
+                padding: 0 7px 0 32px;
+                background-color: $gray-hover;
+                border: 1px solid rgb(223, 225, 230);
+                border-radius: 3px;
+                font-size: 15px;
+
+                &:focus-visible {
+                    outline: none;
+                    border: 2px solid $text-active;
+
+                }
+            }
+        }
+
+        .board__tabNav-avatar {
+            display: flex;
+            margin-right: 12px;
+
+            .board__tabNav-avatar-item {
+                width: 32px;
+                height: 32px;
+                padding: 2px;
+                border-radius: 50%;
+                margin-left: -2px;
+                border: 1px solid $light-gray;
+                background-color: $light-gray;
+                background-position: 50% 50%;
+                background-size: cover;
+                cursor: pointer;
+                transition: all 0.1s ease-in;
+                box-shadow: rgb(255 255 255) 0px 0px 0px 2px;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    transition: all 0.1s ease-in;
+                }
+            }
+
+            .board__tabNav-avatar-item.active {
+                box-shadow: rgb(0 82 204) 0px 0px 0px 2px;
+                transition: all 0.1s ease-in;
+
+            }
+        }
+
+        .board__tabNav-menu {
+            display: flex;
+            height: 32px;
+            line-height: 32px;
+
+            font-size: 15px;
+            color: rgb(94, 108, 132);
+
+
+
+            .board__tabNav-menu-item {
+                height: 100%;
+                padding: 0 12px;
+                background-color: transparent;
+                margin-left: 8px;
+                border-radius: 3px;
+                font-weight: 500;
+                transition: $smooth;
+                cursor: pointer;
+
+                &:nth-child(3) {
+                    display: none;
+                    align-items: center;
+
+                    span {
+                        margin-right: 20px;
+                        font-size: 30px;
+                        font-weight: 100;
+                    }
+                }
+
+                &:hover {
+                    background-color: $gray-hover;
+                    transition: $smooth;
+                }
+            }
+
+            .board__tabNav-menu-item.show {
+                display: flex;
+            }
+
+            .board__tabNav-menu-item.active {
+                background-color: rgb(210, 229, 254);
+                color: rgb(0, 82, 204);
+            }
+        }
+    }
+
+    .board__content {
+        margin-top: 26px;
+        display: flex;
+        justify-content: space-between;
+
+        .board__content-item {
+            display: flex;
+            flex-direction: column;
+
+            background-color: $light-gray;
+            min-height: 400px;
+            width: 25%;
+            margin: 0 5px;
+            border-radius: 3px;
+
+            .board__content-item-heading {
+                padding: 10px 10px 17px;
+                font-size: 12.5px;
+                color: rgb(94, 108, 132);
+                font-weight: 500;
+            }
+        }
+    }
+
+}

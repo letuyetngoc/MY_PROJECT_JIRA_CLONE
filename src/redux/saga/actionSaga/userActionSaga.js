@@ -20,7 +20,7 @@ function* signIn(action) {
                 type: GET_USER_LOGIN,
                 payload: data.content
             })
-            history.push('/home')
+            history.push('/board')
         }
     } catch (error) {
         console.log('error', error)
