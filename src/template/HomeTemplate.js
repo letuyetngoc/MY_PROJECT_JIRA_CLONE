@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Route } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 // icon react
 import { AiOutlineHome } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
@@ -9,6 +10,10 @@ import MenuItem from '../component/menu/MenuItem';
 
 export default function HomeTemplate(props) {
     const { Component, ...restProps } = props
+
+    const userLogin = useMemo(() => {
+        return JSON.parse(localStorage.getItem('userLogin'))
+    }, [])
 
     return (
         <Route {...restProps} render={(propsRout) => {
@@ -35,9 +40,9 @@ export default function HomeTemplate(props) {
                     </div>
                     <div className='homeTemplate__navContent'>
                         <div className='homeTemplate__navContent-header' >
-                            <div className='logo'>J</div>
+                            <div className='logo'>{userLogin.name.slice(0, 1).toUpperCase()}</div>
                             <div className='content'>
-                                <div>Jira clone web</div>
+                                <div>{userLogin.name[0].toUpperCase() + userLogin.name.slice(1)}</div>
                                 <div>Software project</div>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ import HomeTemplate from "./template/HomeTemplate";
 import UserLoginTemplate from "./template/UserLoginTemplate";
 import Loading from "./component/loading/Loading"
 import Board from "./page/Board/Board";
-import ProjectSetting from "./page/ProjectSetting/ProjectSetting";
+import CreateProject from "./page/CreateProject/CreateProject";
 export const history = createBrowserHistory();
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <HomeTemplate path='/board' exact Component={Board} />
-          <HomeTemplate path='/settings' exact Component={ProjectSetting} />
+          <HomeTemplate path='/createProject' exact Component={CreateProject} />
           <UserLoginTemplate path='/register' exact Component={Register} />
           <UserLoginTemplate path='/login' exact Component={Login} />
           <UserLoginTemplate path='' exact Component={Login} />

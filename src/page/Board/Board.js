@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { AiFillGithub } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
 
@@ -7,14 +7,17 @@ export default function Board() {
     const handleActiveClass = e => {
         e.target.classList.toggle('active')
     }
+    const userLogin = useMemo(() => {
+        return JSON.parse(localStorage.getItem('userLogin'))
+    }, [])
 
     return (
         <div className='board'>
             <div className='board__heading'>
-                Projects  <span>/</span>  Kanban Board
+                Projects  <span>/</span>  {userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board
             </div>
             <div className='board__title'>
-                <p>Kanban Board</p>
+                <p>{userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board</p>
                 <a target='blank' href='https://github.com/letuyetngoc/MY_PROJECT_JIRA_CLONE'>
                     <AiFillGithub className='icon' />
                     <span>Github Repo</span>
