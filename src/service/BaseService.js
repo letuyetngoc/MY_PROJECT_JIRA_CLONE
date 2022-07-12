@@ -8,9 +8,9 @@ export default class BaseService {
         return axios({
             method: 'GET',
             url: `${DOMAIN}/${url}`,
-            header: {
+            headers: {
                 'Authorization': 'Bearer' + localStorage.getItem('accessToken'),
-                'TokenCybersoft  ': TOKEN_CYBERSOFT
+                'TokenCybersoft': TOKEN_CYBERSOFT
             }
 
         })
@@ -31,7 +31,7 @@ export default class BaseService {
             method: 'PUT',
             url: `${DOMAIN}/${url}`,
             data: model,
-            header: {
+            headers: {
                 'Authorization': 'Bearer' + localStorage.getItem('accessToken'),
                 'TokenCybersoft': TOKEN_CYBERSOFT
             }
@@ -42,7 +42,7 @@ export default class BaseService {
             method: 'DELETE',
             url: `${DOMAIN}/${url}`,
             data: model,
-            header: {
+            headers: {
                 'Authorization': 'Bearer' + localStorage.getItem('accessToken'),
                 'TokenCybersoft': TOKEN_CYBERSOFT
             }

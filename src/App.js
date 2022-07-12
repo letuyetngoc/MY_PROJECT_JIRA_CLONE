@@ -9,6 +9,7 @@ import UserLoginTemplate from "./template/UserLoginTemplate";
 import Loading from "./component/loading/Loading"
 import Board from "./page/Board/Board";
 import CreateProject from "./page/CreateProject/CreateProject";
+import FakeComponent from "./component/FakeComponent";
 export const history = createBrowserHistory();
 function App() {
   return (

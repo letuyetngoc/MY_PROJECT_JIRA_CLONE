@@ -1,15 +1,20 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { AiFillGithub } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
 
 export default function Board() {
 
-    const handleActiveClass = e => {
-        e.target.classList.toggle('active')
-    }
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     const userLogin = useMemo(() => {
         return JSON.parse(localStorage.getItem('userLogin'))
     }, [])
+
+    const handleActiveClass = e => {
+        e.target.classList.toggle('active')
+    }
 
     return (
         <div className='board'>

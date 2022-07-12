@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 import rootReducer from '../reducer/RootReducer'
 import * as userSaga from './actionSaga/userActionSaga'
+import * as projectCategory from './actionSaga/projectCategorySaga'
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
 
@@ -18,6 +19,7 @@ sagaMiddleware.run(rootSaga)
 function* rootSaga() {
     yield all([
         userSaga.folowSignIn(),
-        userSaga.followSignUp()
+        userSaga.followSignUp(),
+        projectCategory.followProjectCategory()
     ])
 }
