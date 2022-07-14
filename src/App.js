@@ -14,7 +14,7 @@ export const history = createBrowserHistory();
 function App() {
   return (
     <>
-      {/* <PopupModal /> */}
+      <PopupModal />
       <Message />
       <Loading />
       <Router history={history}>

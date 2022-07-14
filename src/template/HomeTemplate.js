@@ -1,15 +1,18 @@
 import React, { useMemo } from 'react'
 import { Route } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // icon react
 import { AiOutlineHome } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsQuestionCircle } from "react-icons/bs";
 import MenuItem from '../component/menu/MenuItem';
+import { APPEAR_MODAL } from '../redux/types/PopupModalTypes';
+import CreateTask from '../page/CreateTask/CreateTask';
 
 export default function HomeTemplate(props) {
     const { Component, ...restProps } = props
+    const dispatch = useDispatch()
 
     const userLogin = useMemo(() => {
         return JSON.parse(localStorage.getItem('userLogin'))
@@ -27,11 +30,11 @@ export default function HomeTemplate(props) {
                         </div>
                         <div className='hometemplate__nav-icon'>
                             <BiSearch className='icon' />
-                            <div>SEARCH ISSUE</div>
+                            <div>SEARCH TASK</div>
                         </div>
-                        <div className='hometemplate__nav-icon' >
+                        <div onClick={() => { dispatch({ type: APPEAR_MODAL, payload: <CreateTask /> }) }} className='hometemplate__nav-icon' >
                             <AiOutlinePlus className='icon' />
-                            <div>CREATE ISSUE</div>
+                            <div >CREATE TASK</div>
                         </div>
                         <div className='hometemplate__nav-icon end' >
                             <BsQuestionCircle className='icon' />

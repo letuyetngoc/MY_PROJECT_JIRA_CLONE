@@ -1,6 +1,7 @@
 // helper
 @import './helpers';
 // vendor
+@import 'antd/dist/antd.css';
 //base
 @import './reset';
 //component
@@ -16,5 +17,6 @@
 @import './page/login';
 @import './page//register';
 @import './page/board';
-@import './page/createProject'
+@import './page/createProject';
+@import './page//createTask';
 // theme

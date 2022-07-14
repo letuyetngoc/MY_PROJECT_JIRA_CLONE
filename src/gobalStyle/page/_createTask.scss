@@ -1,0 +1,110 @@
+.createTask {
+    .createTask__heading {
+        font-size: 21px;
+        padding-bottom: 15px;
+        color: rgb(23, 43, 77);
+    }
+
+    .createTask__group {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+
+        &:nth-child(8) {
+            justify-content: flex-end !important;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 0 12px;
+            height: 32px;
+            border-radius: 3px;
+            background-color: rgb(0, 82, 204);
+            font-size: 14.5px;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(0, 94, 235);
+            }
+        }
+
+        .btn.btn_cancel {
+            background-color: transparent;
+            color: rgb(66, 82, 110);
+            margin-left: 10px;
+
+            &:hover {
+                background-color: rgb(235, 236, 240);
+            }
+        }
+
+        .ant-select-selector {
+            height: 30px;
+            background-color: rgb(244, 245, 247);
+            padding: 5px 5px 5px 10px;
+        }
+
+        .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 3px;
+        }
+
+        .createTask__item {
+            padding: 5px 5px 5px 10px;
+            width: 100%;
+
+            label {
+                display: block;
+                padding-bottom: 5px;
+                color: rgb(94, 108, 132);
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            select {
+                width: 100%;
+                padding: 5px 5px 5px 10px;
+                height: 32px;
+                background-color: rgb(244, 245, 247);
+                color: rgb(23, 43, 77);
+                border-radius: 3px;
+                border: 1px solid rgb(223, 225, 230);
+                outline: none;
+
+                &:focus-visible {
+                    outline: none;
+                }
+
+            }
+
+            input {
+                @extend select;
+            }
+
+            .time_tracking {
+                .time_tracking-text {
+                    display: flex;
+                    justify-content: space-between;
+                    font-weight: 500;
+                    margin-top: -8px;
+                    margin-bottom: 7px;
+
+                }
+
+                .time_tracking-input {
+                    display: flex;
+                    justify-content: space-between;
+
+                    div {
+                        &:nth-child(1) {
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

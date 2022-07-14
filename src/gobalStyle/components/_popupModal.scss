@@ -1,21 +1,46 @@
 .popupModal {
-    position: relative;
-    z-index: 110;
-    min-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
     background-color: rgba(9, 30, 66, 0.54);
+    overflow: hidden auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
     display: flex;
     justify-content: center;
-    align-items: center;
 
-    padding: 50px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     .popupModal__content {
-        position: absolute;
-        z-index: 111;
+        position: relative;
+        z-index: 1001;
         width: 100%;
+        height: fit-content;
+        max-width: 700px;
+
         background-color: rgb(255, 255, 255);
-        max-width: 1040px;
         box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
         border-radius: 3px;
+        padding: 25px 40px 35px;
+        animation: appear 0.3s linear;
+
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(-50px);
+        display: none;
+    }
+
+    100% {
+        transform: translateY(0);
+        display: initial;
     }
 }

@@ -1,12 +1,20 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Editor } from '@tinymce/tinymce-react';
 import { PROJECT_CATEGORY_API } from '../../redux/saga/typesSaga/projectCategoryTypes';
+import { CREATE_PROJECT_API } from '../../redux/saga/typesSaga/projectType';
 
 export default function CreateProject() {
 
     const editorRef = useRef(null);
     const dispatch = useDispatch()
+
+    const [state, setState] = useState({
+        projectName: '',
+        description: '',
+        categoryId: '1',
+        alias: 'string',
+    })
 
     const { arrProjectCategory } = useSelector(state => state.ProjectCategoryReducer)
 
@@ -19,11 +27,19 @@ export default function CreateProject() {
         dispatch({ type: PROJECT_CATEGORY_API })
     }, [])
 
+    const handleChange = (e) => {
+        state[e.target.name] = e.target.value
+        setState({ ...state })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (editorRef.current) {
-            console.log(editorRef.current.getContent());
+            state.description = editorRef.current.getContent()
+            setState({ ...state })
         }
+        console.log(state)
+        dispatch({ type: CREATE_PROJECT_API, payload: state })
     }
     return (
         <div className='createProject'>
@@ -36,7 +52,7 @@ export default function CreateProject() {
                 <div className='createProject__item'>
                     <label>Name</label>
                     <div>
-                        <input name='projectName' placeholder='Project name' />
+                        <input onChange={handleChange} name='projectName' placeholder='Project name' />
                     </div>
                 </div>
 
@@ -66,9 +82,12 @@ export default function CreateProject() {
                 <div className='createProject__item'>
                     <label>Project Category</label>
                     <div>
-                        <select name='categoryId' >
+                        <select onChange={(e) => {
+                            state[e.target.name] = e.target.options.selectedIndex + 1
+                            setState({ ...state })
+                        }} name='categoryId' >
                             {arrProjectCategory.map(item => {
-                                return <option key={item.id}>{item.projectCategoryName}</option>
+                                return <option key={item.id} id={item.id}>{item.projectCategoryName}</option>
                             })}
                         </select>
                     </div>
