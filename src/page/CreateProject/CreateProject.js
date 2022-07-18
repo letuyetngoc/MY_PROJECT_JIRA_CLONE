@@ -38,7 +38,7 @@ export default function CreateProject() {
             state.description = editorRef.current.getContent()
             setState({ ...state })
         }
-        console.log(state)
+        // console.log(state)
         dispatch({ type: CREATE_PROJECT_API, payload: state })
     }
     return (

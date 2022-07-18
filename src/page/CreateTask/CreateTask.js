@@ -1,14 +1,28 @@
-import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { InputNumber, Slider, Select } from 'antd';
 import { Editor } from '@tinymce/tinymce-react';
 import { HIDE_MODAL } from '../../redux/types/PopupModalTypes';
+import { CREATE_TASK_API, GET_ALL_PRIORITY_API, GET_ALL_PROJECT_API, GET_ALL_STATUS_API, GET_ALL_TASK_TYPES_API } from '../../redux/saga/typesSaga/projectType';
+import { GET_USER_API } from '../../redux/saga/typesSaga/UserTypesSaga';
+import { MESSAGE_APPEAR } from '../../redux/types/MessageTypes';
 
 export default function CreateTask() {
     const dispatch = useDispatch()
     const { Option } = Select;
-    const children = [];
+
     const editorRef = useRef(null);
+
+    const [projectMembers, setProjectMember] = useState([])
+
+    const { arrStatus, arrPriority, arrTaskTypes, arrProject } = useSelector(state => state.ProjectReducer)
+
+    useEffect(() => {
+        dispatch({ type: GET_ALL_PROJECT_API })
+        dispatch({ type: GET_ALL_STATUS_API })
+        dispatch({ type: GET_ALL_PRIORITY_API })
+        dispatch({ type: GET_ALL_TASK_TYPES_API })
+    }, [])
 
     const [time, setTime] = useState(
         {
@@ -17,14 +31,40 @@ export default function CreateTask() {
             tracking: 0,
         }
     );
+    const [values, setValues] = useState({
+        listUserAsign: [
+            0
+        ],
+        taskName: '',
+        description: '',
+        statusId: '1',
+        originalEstimate: 0,
+        timeTrackingSpent: 0,
+        timeTrackingRemaining: 0,
+        projectId: 0,
+        typeId: 1,
+        priorityId: 1,
+    })
 
-    for (let i = 10; i < 36; i++) {
-        children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+
+    const handleChange = (e) => {
+        const newValue = { ...values }
+        newValue[e.target.name] = e.target.value
+        setValues(newValue)
     }
-
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    };
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (editorRef.current) {
+            values.description = editorRef.current.getContent()
+            setValues({ ...values })
+        }
+        console.log(values)
+        if (values.taskName == '') {
+            dispatch({ type: MESSAGE_APPEAR, payload: <p>Task name is required!</p> })
+            return
+        }
+        dispatch({ type: CREATE_TASK_API, payload: values })
+    }
     return (
         <div className='createTask'>
             <form>
@@ -34,40 +74,45 @@ export default function CreateTask() {
                 <div className='createTask__group'>
                     <div className='createTask__item'>
                         <label>Project</label>
-                        <select>
-                            <option>task 1</option>
-                            <option>task 2</option>
+                        <select onChange={(e) => {
+                            const projectItem = JSON.parse(e.target.value)
+                            setProjectMember(projectItem.members)
+                            setValues({ ...values, projectId: projectItem.id })
+                        }}>
+                            {arrProject.map((item, index) => <option value={JSON.stringify(item)}
+                                key={index}>{item.projectName}</option>)}
                         </select>
                     </div>
                 </div>
                 <div className='createTask__group'>
                     <div className='createTask__item'>
                         <label>Task name</label>
-                        <input />
+                        <input name='taskName' onChange={handleChange} />
                     </div>
                 </div>
                 <div className='createTask__group'>
                     <div className='createTask__item'>
                         <label>Status</label>
-                        <select>
-                            <option>Status 1</option>
-                            <option>Status 2</option>
+                        <select onChange={handleChange} name='statusId'>
+                            {arrStatus.map(item => {
+                                return <option key={item.statusId} value={item.statusId} >{item.statusName}</option>
+                            })}
                         </select>
                     </div>
                 </div>
                 <div className='createTask__group'>
                     <div className='createTask__item'>
                         <label>Priority</label>
-                        <select>
-                            <option>Status 1</option>
-                            <option>Status 2</option>
+                        <select onChange={handleChange} name='priorityId'>
+                            {arrPriority.map(item => {
+                                return <option key={item.priorityId} value={Number(item.priorityId)} >{item.priority}</option>
+                            })}
                         </select>
                     </div>
                     <div className='createTask__item'>
                         <label>Task type</label>
-                        <select>
-                            <option>Status 1</option>
-                            <option>Status 2</option>
+                        <select onChange={handleChange} name='typeId'>
+                            {arrTaskTypes.map(item => <option key={item.id} value={Number(item.id)}>{item.taskType}</option>)}
                         </select>
                     </div>
                 </div>
@@ -76,20 +121,20 @@ export default function CreateTask() {
                         <div >
                             <label>Assignees</label>
                             <Select
-                                mode="multiple"
+                                mode="tags"
                                 allowClear
                                 style={{
                                     width: '100%',
                                 }}
                                 placeholder="Please select"
-                                onChange={handleChange}
+                                onChange={value => setValues({ ...values, listUserAsign: value })}
                             >
-                                {children}
+                                {projectMembers && projectMembers.map((item, index) => <Option value={`${item.userId}`} key={index}>{item.name}</Option>)}
                             </Select>
                         </div>
                         <div style={{ marginTop: '20px' }}>
                             <label>Original Estimate</label>
-                            <InputNumber onChange={handleChange} style={{ width: '100%', height: '32px' }} min={0} max={100} />
+                            <InputNumber onChange={value => setValues({ ...values, originalEstimate: value })} style={{ width: '100%', height: '32px' }} min={0} max={100} />
                         </div>
                     </div>
                     <div className='createTask__item'>
@@ -112,11 +157,12 @@ export default function CreateTask() {
                                         min={0}
                                         max={100}
                                         value={time.spending}
-                                        onChange={(newValue) => {
+                                        onChange={async (newValue) => {
                                             let newValue1 = newValue
                                             time.spending = newValue1
                                             time.tracking = newValue1 * 100 / (newValue1 + time.remaining)
-                                            setTime({ ...time })
+                                            await setTime({ ...time })
+                                            await setValues({ ...values, timeTrackingSpent: time.spending })
                                         }}
                                     />
                                 </div>
@@ -127,11 +173,13 @@ export default function CreateTask() {
                                         min={0}
                                         max={100}
                                         value={time.remaining}
-                                        onChange={(newValue) => {
+                                        onChange={async (newValue) => {
                                             let newValue1 = newValue
                                             time.remaining = newValue1
                                             time.tracking = time.spending * 100 / (time.spending + newValue1)
-                                            setTime({ ...time })
+                                            await setTime({ ...time })
+                                            await setValues({ ...values, timeTrackingRemaining: time.remaining })
+
                                         }}
                                     />
                                 </div>
@@ -164,7 +212,7 @@ export default function CreateTask() {
                     </div>
                 </div>
                 <div className='createTask__group'>
-                    <button className='btn btn_submit'>Create task</button>
+                    <button type='submit' className='btn btn_submit' onClick={handleSubmit}>Create task</button>
                     <button className='btn btn_cancel' onClick={() => dispatch({ type: HIDE_MODAL })}>Cancel</button>
                 </div>
             </form >

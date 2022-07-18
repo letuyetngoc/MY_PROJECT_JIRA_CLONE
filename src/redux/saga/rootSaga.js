@@ -21,8 +21,13 @@ function* rootSaga() {
     yield all([
         userSaga.folowSignIn(),
         userSaga.followSignUp(),
+        userSaga.followGetUserAction(),
         projectCategory.followProjectCategory(),
-        project.followCreateProjectAction()
-
+        project.followCreateProjectAction(),
+        project.followGetAllProjectAction(),
+        project.followGetAllStatus(),
+        project.followGetAllPriorityAction(),
+        project.followGetAllTaskTypesAction(),
+        project.followCreateTaskAction(),
     ])
 }

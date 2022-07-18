@@ -24,7 +24,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: black;
+        color: $blue;
+
+        p {
+            margin-bottom: 0;
+        }
 
         @include Responesive(SS) {
             font-size: 13px;

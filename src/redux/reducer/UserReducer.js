@@ -9,7 +9,7 @@ const UserReducer = (state = stateDefault, action) => {
     switch (action.type) {
         case GET_USER_LOGIN: {
             state.userLogin = action.payload
-            localStorage.setItem('accessToken', action.payload.accessToken)
+            localStorage.setItem('accessToken', JSON.stringify(action.payload.accessToken))
             localStorage.setItem('userLogin', JSON.stringify(action.payload))
             return { ...state }
         }
