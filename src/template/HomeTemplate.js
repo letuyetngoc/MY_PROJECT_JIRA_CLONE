@@ -9,6 +9,7 @@ import { BsQuestionCircle } from "react-icons/bs";
 import MenuItem from '../component/menu/MenuItem';
 import { APPEAR_MODAL } from '../redux/types/PopupModalTypes';
 import CreateTask from '../page/CreateTask/CreateTask';
+import { history } from '../App';
 
 export default function HomeTemplate(props) {
     const { Component, ...restProps } = props
@@ -52,9 +53,19 @@ export default function HomeTemplate(props) {
                         <MenuItem />
                     </div>
                     <div className='homeTemplate__content'>
+                        <div className='homeTemplate__content-userAvatar'>
+                            <div className='avatar' >{userLogin.name.slice(0, 1).toUpperCase()}</div>
+                            <div className='content'>
+                                <p onClick={() => {
+                                    localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('userLogin')
+                                    history.push('/login')
+                                }}>Log out</p>
+                            </div>
+                        </div>
                         <Component {...propsRout} />
                     </div>
-                </div>
+                </div >
             )
         }} />
     )

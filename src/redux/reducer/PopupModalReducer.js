@@ -1,8 +1,9 @@
 import React from "react"
+import TaskDetail from "../../page/TaskDetail/TaskDetail"
 import { APPEAR_MODAL, HIDE_MODAL } from "../types/PopupModalTypes"
 const stateDefault = {
     Component: <p>Nội dung mặc định</p>,
-    isModal: false
+    isModal: false,
 }
 const PopupModalReducer = (state = stateDefault, action) => {
     switch (action.type) {

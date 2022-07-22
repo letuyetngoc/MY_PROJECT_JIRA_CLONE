@@ -1,11 +1,13 @@
-import { CREATE_PROJECT, GET_ALL_PRIORITY, GET_ALL_PROJECT, GET_ALL_STATUS, GET_ALL_TASK_TYPES } from "../types/ProjectType"
+import { CREATE_PROJECT, GET_ALL_PRIORITY, GET_ALL_PROJECT, GET_ALL_PROJECT_INITIAL, GET_ALL_STATUS, GET_ALL_TASK_TYPES, GET_PROJECT_DETAIL } from "../types/ProjectType"
 
 const stateDefault = {
     projectCreated: {},
     arrProject: [],
+    arrProjectInitial: [],
     arrStatus: [],
     arrPriority: [],
-    arrTaskTypes: []
+    arrTaskTypes: [],
+    projectDetail: {},
 }
 const ProjectReducer = (state = stateDefault, action) => {
     switch (action.type) {
@@ -15,6 +17,10 @@ const ProjectReducer = (state = stateDefault, action) => {
         }
         case GET_ALL_PROJECT: {
             state.arrProject = action.payload
+            return { ...state }
+        }
+        case GET_ALL_PROJECT_INITIAL: {
+            state.arrProjectInitial = action.payload
             return { ...state }
         }
         case GET_ALL_STATUS: {
@@ -27,6 +33,10 @@ const ProjectReducer = (state = stateDefault, action) => {
         }
         case GET_ALL_TASK_TYPES: {
             state.arrTaskTypes = action.payload
+            return { ...state }
+        }
+        case GET_PROJECT_DETAIL: {
+            state.projectDetail = action.payload
             return { ...state }
         }
         default: return { ...state }

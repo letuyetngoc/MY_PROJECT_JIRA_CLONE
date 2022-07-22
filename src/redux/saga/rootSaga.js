@@ -22,6 +22,7 @@ function* rootSaga() {
         userSaga.folowSignIn(),
         userSaga.followSignUp(),
         userSaga.followGetUserAction(),
+        userSaga.followDeleteUserAction(),
         projectCategory.followProjectCategory(),
         project.followCreateProjectAction(),
         project.followGetAllProjectAction(),
@@ -29,5 +30,9 @@ function* rootSaga() {
         project.followGetAllPriorityAction(),
         project.followGetAllTaskTypesAction(),
         project.followCreateTaskAction(),
+        project.followGetProjectDetail(),
+        project.followUpdateProjectAction(),
+        project.followDeleteProjectAction(),
+
     ])
 }

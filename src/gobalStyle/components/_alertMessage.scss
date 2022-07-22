@@ -1,0 +1,82 @@
+.alertMessage {
+    background-color: $light-gray;
+    width: 300px;
+    // height: 80px;
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    z-index: 1000;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    box-shadow: rgba(184, 138, 138, 0.1) 0px 5px 10px 0px;
+    animation-name: message;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+
+    @include Responesive(SS) {
+        width: 260px;
+    }
+
+    .alertMessage__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        color: $blue;
+
+        p {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        @include Responesive(SS) {
+            font-size: 13px;
+        }
+    }
+
+    .alertMessage__content-btn {
+        display: block;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        text-align: right;
+
+        button {
+            padding: 2px 5px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+
+            &:nth-child(1) {
+                background-color: $text-active;
+                color: white;
+                margin-right: 3px;
+
+                &:hover {
+                    background-color: $blue;
+                }
+            }
+
+            &:nth-child(2) {
+                background-color: transparent;
+                border: 1px solid rgb(235, 236, 240);
+
+                &:hover {
+                    background-color: rgb(235, 236, 240);
+                }
+            }
+        }
+    }
+}
+
+@keyframes message {
+    0% {
+        display: none;
+        top: -80px;
+    }
+
+    100% {
+        display: initial;
+        top: 8px;
+    }
+}

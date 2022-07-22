@@ -1,9 +1,9 @@
-import React from 'react'
-import Message from '../../component/message/Message'
-import { GET_USER_LOGIN, MESSAGE_ERROR_SIGN_IN } from "../types/UserTypes"
+import { GET_ALL_USER, GET_USER_ID, GET_USER_LOGIN } from "../types/UserTypes"
 
 const stateDefault = {
-    userLogin: ''
+    userLogin: '',
+    arrUser: [],
+    deleteUserId: '',
 }
 const UserReducer = (state = stateDefault, action) => {
     switch (action.type) {
@@ -11,6 +11,14 @@ const UserReducer = (state = stateDefault, action) => {
             state.userLogin = action.payload
             localStorage.setItem('accessToken', JSON.stringify(action.payload.accessToken))
             localStorage.setItem('userLogin', JSON.stringify(action.payload))
+            return { ...state }
+        }
+        case GET_ALL_USER: {
+            state.arrUser = action.payload
+            return { ...state }
+        }
+        case GET_USER_ID: {
+            state.deleteUserId = action.payload
             return { ...state }
         }
         default: return { ...state }

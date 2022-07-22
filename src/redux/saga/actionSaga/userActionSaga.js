@@ -2,8 +2,8 @@ import React from 'react'
 
 import { call, put, takeLatest, delay } from "redux-saga/effects"
 import { userService } from "../../../service/UserService"
-import { GET_USER_LOGIN } from "../../types/UserTypes"
-import { GET_USER_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
+import { GET_ALL_USER, GET_USER_LOGIN } from "../../types/UserTypes"
+import { DELETE_USER_API, GET_USER_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
 import { history } from '../../../App'
 import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from '../../types/MessageTypes'
 import { APPEAR_LOADING, HIDE_LOADING } from '../../types/LoadingTypes'
@@ -64,11 +64,11 @@ export function* followSignUp() {
     yield takeLatest(SIGN_UP_API, signup)
 }
 
-function* getUserAction() {
+function* getUserAction(action) {
     try {
-        const { data, status } = yield call(() => userService.getUser())
+        const { data, status } = yield call(() => userService.getUser(action.payload))
         if (status === 200) {
-            console.log(data.content)
+            yield put({ type: GET_ALL_USER, payload: data.content })
         }
     } catch (error) {
         console.log(error)
@@ -76,4 +76,21 @@ function* getUserAction() {
 }
 export function* followGetUserAction() {
     yield takeLatest(GET_USER_API, getUserAction)
+}
+
+function* deleteUserAction(action) {
+    try {
+        const { data, status } = yield call(() => userService.deleteUser(action.payload))
+        if (status === 200) {
+            yield put({ type: GET_USER_API, payload: '' })
+            yield put({ type: MESSAGE_APPEAR, payload: <p>Delete User Sucessfully!</p> })
+            yield delay(2000)
+            yield put({ type: MESSAGE_DISAPPEAR })
+        }
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followDeleteUserAction() {
+    yield takeLatest(DELETE_USER_API, deleteUserAction)
 }

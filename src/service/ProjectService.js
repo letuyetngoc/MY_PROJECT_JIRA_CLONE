@@ -19,5 +19,14 @@ class ProjectService extends BaseService {
     createTask = (data) => {
         return this.post('api/Project/createTask', data)
     }
+    getProjectDetail = (projectId) => {
+        return this.get(`api/Project/getProjectDetail?id=${projectId}`)
+    }
+    updateProject = (projectId, data) => {
+        return this.put(`api/Project/updateProject?projectId=${projectId}`, data)
+    }
+    deleteProject = (projectId) => {
+        return this.delete(`api/Project/deleteProject?projectId=${projectId}`)
+    }
 }
 export const projectService = new ProjectService()

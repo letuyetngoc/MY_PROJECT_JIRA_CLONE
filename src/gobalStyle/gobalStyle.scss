@@ -9,6 +9,8 @@
 @import './components/message';
 @import './components/menuItem';
 @import './components/loading';
+@import './components/dragAndDrop';
+@import './components/alertMessage';
 //layout
 @import './template/homeTemplate';
 @import './template/userLoginTemplate';
@@ -19,4 +21,8 @@
 @import './page/board';
 @import './page/createProject';
 @import './page//createTask';
+@import './page//taskDetail';
+@import './page/userManagement';
+@import './page/createUser';
+@import './page//projectManagement';
 // theme

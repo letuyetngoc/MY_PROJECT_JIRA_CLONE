@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo } from 'react'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
+import DragAndDrop from '../../component/dragAndDrop/DragAndDrop';
 
 export default function Board() {
 
@@ -72,23 +74,7 @@ export default function Board() {
                 </div>
             </div>
             <div className='board__content'>
-                <div className='board__content-item'>
-                    <div className='board__content-item-heading'>BACKLOG 1 of 2</div>
-                    <div className='board__content-item-content'></div>
-                </div>
-                <div className='board__content-item'>
-                    <div className='board__content-item-heading'>SELECTED FOR DEVELOPMENT 0 of 3</div>
-                    <div className='board__content-item-content'></div>
-                </div>
-                <div className='board__content-item'>
-                    <div className='board__content-item-heading'>IN PROGRESS 1 of 2</div>
-                    <div className='board__content-item-content'></div>
-                </div>
-                <div className='board__content-item'>
-                    <div className='board__content-item-heading'>DONE 1 of 2</div>
-                    <div className='board__content-item-content'></div>
-                </div>
-
+                <DragAndDrop />
             </div>
         </div>
     )

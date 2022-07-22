@@ -1,8 +1,11 @@
-import { call, put, takeLatest, delay } from "redux-saga/effects"
+import { type } from "@testing-library/user-event/dist/type";
+import { call, put, takeLatest, delay, select } from "redux-saga/effects"
+import ProjectEdit from "../../../page/ProjecManagement/ProjectEdit";
 import { projectService } from "../../../service/ProjectService";
-import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../../types/MessageTypes";
-import { CREATE_PROJECT, GET_ALL_PRIORITY, GET_ALL_PROJECT, GET_ALL_STATUS, GET_ALL_TASK_TYPES } from "../../types/ProjectType";
-import { CREATE_PROJECT_API, CREATE_TASK_API, GET_ALL_PRIORITY_API, GET_ALL_PROJECT_API, GET_ALL_STATUS_API, GET_ALL_TASK_TYPES_API } from "../typesSaga/projectType";
+import { MESSAGE_ALERT_APPEAR, MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../../types/MessageTypes";
+import { APPEAR_MODAL, HIDE_MODAL } from "../../types/PopupModalTypes";
+import { CREATE_PROJECT, GET_ALL_PRIORITY, GET_ALL_PROJECT, GET_ALL_PROJECT_INITIAL, GET_ALL_STATUS, GET_ALL_TASK_TYPES, GET_PROJECT_DETAIL } from "../../types/ProjectType";
+import { CREATE_PROJECT_API, CREATE_TASK_API, DELETE_PROJECT_API, GET_ALL_PRIORITY_API, GET_ALL_PROJECT_API, GET_ALL_STATUS_API, GET_ALL_TASK_TYPES_API, GET_PROJECT_DETAIL_API, UPDATE_PROJECT_API } from "../typesSaga/projectType";
 
 function* createProjectAction(action) {
     try {
@@ -12,6 +15,7 @@ function* createProjectAction(action) {
             yield delay(2000)
             yield put({ type: MESSAGE_DISAPPEAR })
             yield put({ type: CREATE_PROJECT, payload: data.content })
+            yield put({ type: GET_ALL_PROJECT_API })
         }
     } catch (error) {
         console.log(error)
@@ -26,6 +30,7 @@ function* getAllProjectAction() {
         const { data, status } = yield call(() => projectService.getAllProject())
         if (status === 200) {
             yield put({ type: GET_ALL_PROJECT, payload: data.content })
+            yield put({ type: GET_ALL_PROJECT_INITIAL, payload: data.content })
         }
     } catch (error) {
         console.log(error)
@@ -94,4 +99,51 @@ function* createTaskAction(action) {
 }
 export function* followCreateTaskAction() {
     yield takeLatest(CREATE_TASK_API, createTaskAction)
+}
+
+function* getProjectDetail(action) {
+    try {
+        const result = yield call(() => projectService.getProjectDetail(action.payload))
+        yield put({ type: GET_PROJECT_DETAIL, payload: result.data.content })
+        yield put({ type: APPEAR_MODAL, payload: <ProjectEdit /> })
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followGetProjectDetail() {
+    yield takeLatest(GET_PROJECT_DETAIL_API, getProjectDetail)
+}
+function* updateProjectAction(action) {
+    try {
+        const { status } = yield call(() => projectService.updateProject(action.payload.id, action.payload))
+        if (status === 200) {
+            yield put({ type: GET_ALL_PROJECT_API })
+            yield put({ type: HIDE_MODAL })
+            yield put({ type: MESSAGE_APPEAR, payload: <p>Cập nhật thành công!</p> })
+            yield delay(2000)
+            yield put({ type: MESSAGE_DISAPPEAR })
+        }
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followUpdateProjectAction() {
+    yield takeLatest(UPDATE_PROJECT_API, updateProjectAction)
+}
+
+function* deleteProjectAction(action) {
+    try {
+        const { status, data } = yield call(() => projectService.deleteProject(action.payload))
+        if (status === 200) {
+            yield put({ type: MESSAGE_APPEAR, payload: <p>Delete Project Sucessfully</p> })
+            yield put({ type: GET_ALL_PROJECT_API })
+            yield delay(2000)
+            yield put({ type: MESSAGE_DISAPPEAR })
+        }
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followDeleteProjectAction() {
+    yield takeLatest(DELETE_PROJECT_API, deleteProjectAction)
 }

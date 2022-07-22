@@ -9,8 +9,12 @@ import UserLoginTemplate from "./template/UserLoginTemplate";
 import Loading from "./component/loading/Loading"
 import Board from "./page/Board/Board";
 import CreateProject from "./page/CreateProject/CreateProject";
-import FakeComponent from "./component/FakeComponent";
+import UserManagement from "./page/UserManagement/UserManagement";
+import ProjectManagement from "./page/ProjecManagement/ProjectManagement";
+import AlertMessage from "./component/message/AlertMessage";
+
 export const history = createBrowserHistory();
+
 function App() {
   return (
     <>
@@ -23,6 +27,8 @@ function App() {
           <HomeTemplate path='/createProject' exact Component={CreateProject} />
           <UserLoginTemplate path='/register' exact Component={Register} />
           <UserLoginTemplate path='/login' exact Component={Login} />
+          <HomeTemplate path='/projectManagement' exact Component={ProjectManagement} />
+          <HomeTemplate path='/userManagement' exact Component={UserManagement} />
           <UserLoginTemplate path='' exact Component={Login} />
           {/* <HomeTemplate path='' exact Component={Home} /> */}
         </Switch>

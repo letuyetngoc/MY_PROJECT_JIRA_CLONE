@@ -1,0 +1,33 @@
+.dragAndDrop__item {
+    &:hover {
+        background-color: rgb(235, 236, 240) !important;
+        cursor: pointer;
+        transition: $smooth;
+    }
+
+    .dragAndDrop__item-content {
+        padding-bottom: 11px;
+    }
+
+    .dragAndDrop__item-footer {
+        display: flex;
+        justify-content: space-between;
+
+        .dragAndDrop__item-footer-icon {
+            display: flex;
+            justify-content: flex-start;
+            font-size: 18px;
+
+        }
+
+        .dragAndDrop__item-footer-user {
+            box-shadow: rgb(255 255 255) 0px 0px 0px 2px;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 100%;
+            background-color: rgb(235, 236, 240);
+            text-align: center;
+        }
+    }
+}

@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import BaseService from './BaseService'
 
 class UserService extends BaseService {
@@ -8,8 +7,11 @@ class UserService extends BaseService {
     signup = (data) => {
         return this.post('api/Users/signup', data)
     }
-    getUser = () => {
-        return this.get('api/Users/getUser')
+    getUser = (searchValue) => {
+        return this.get(`api/Users/getUser?keyword=${searchValue}`)
+    }
+    deleteUser = (userId) => {
+        return this.delete(`api/Users/deleteUser?id=${userId}`)
     }
 }
 export const userService = new UserService()

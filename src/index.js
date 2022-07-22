@@ -6,12 +6,12 @@ import GobalStyle from "./gobalStyle/index.js";
 import { store } from "./redux/saga/rootSaga.js";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <GobalStyle >
-        <App />
-      </GobalStyle>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <GobalStyle >
+      <App />
+    </GobalStyle>
+  </Provider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
