@@ -13,11 +13,11 @@ import { useSelector } from 'react-redux';
 import { GET_USER_ID } from '../../redux/types/UserTypes';
 import { MESSAGE_ALERT_APPEAR, MESSAGE_ALERT_DISAPPEAR } from '../../redux/types/MessageTypes';
 import AlertMessage from '../../component/message/AlertMessage';
+import EditUser from './EditUser';
 
 const UserManagement = () => {
     const dispatch = useDispatch()
     const { arrUser, deleteUserId } = useSelector(state => state.UserReducer)
-
     const columns = [
         {
             title: 'Id',
@@ -67,6 +67,7 @@ const UserManagement = () => {
             render: (_, value) => {
                 return <div className='userManagement__action'>
                     <div onClick={() => {
+                        dispatch({ type: APPEAR_MODAL, payload: <EditUser userDetail={value} /> })
                     }}><AiOutlineEdit /></div>
                     <div onClick={() => {
                         dispatch({ type: MESSAGE_ALERT_APPEAR })

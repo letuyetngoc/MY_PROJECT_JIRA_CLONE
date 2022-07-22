@@ -23,6 +23,7 @@ function* rootSaga() {
         userSaga.followSignUp(),
         userSaga.followGetUserAction(),
         userSaga.followDeleteUserAction(),
+        userSaga.followEditUserAction(),
         projectCategory.followProjectCategory(),
         project.followCreateProjectAction(),
         project.followGetAllProjectAction(),

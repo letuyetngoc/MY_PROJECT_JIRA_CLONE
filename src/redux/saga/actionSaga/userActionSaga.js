@@ -3,10 +3,11 @@ import React from 'react'
 import { call, put, takeLatest, delay } from "redux-saga/effects"
 import { userService } from "../../../service/UserService"
 import { GET_ALL_USER, GET_USER_LOGIN } from "../../types/UserTypes"
-import { DELETE_USER_API, GET_USER_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
+import { DELETE_USER_API, EDIT_USER_API, GET_USER_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
 import { history } from '../../../App'
 import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from '../../types/MessageTypes'
 import { APPEAR_LOADING, HIDE_LOADING } from '../../types/LoadingTypes'
+import { HIDE_MODAL } from '../../types/PopupModalTypes'
 
 function* signIn(action) {
     try {
@@ -93,4 +94,22 @@ function* deleteUserAction(action) {
 }
 export function* followDeleteUserAction() {
     yield takeLatest(DELETE_USER_API, deleteUserAction)
+}
+
+function* editUserAction(action) {
+    try {
+        const { status, data } = yield call(() => userService.editUser(action.payload))
+        if (status === 200) {
+            yield put({ type: HIDE_MODAL })
+            yield put({ type: GET_USER_API, payload: '' })
+            yield put({ type: MESSAGE_APPEAR, payload: <p>Update Sucessfully!</p> })
+            yield delay(2000)
+            yield put({ type: MESSAGE_DISAPPEAR })
+        }
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followEditUserAction() {
+    yield takeLatest(EDIT_USER_API, editUserAction)
 }

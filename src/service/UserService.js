@@ -13,5 +13,8 @@ class UserService extends BaseService {
     deleteUser = (userId) => {
         return this.delete(`api/Users/deleteUser?id=${userId}`)
     }
+    editUser = (data) => {
+        return this.put('api/Users/editUser', data)
+    }
 }
 export const userService = new UserService()
