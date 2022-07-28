@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import CommentReducer from "./CommentReducer";
 import LoadingReducer from "./LoadingReducer";
 import MessageReducer from "./MessageReducer";
 import PopupModalReducer from "./PopupModalReducer";
@@ -13,5 +14,6 @@ const rootReducer = combineReducers({
     ProjectCategoryReducer,
     ProjectReducer,
     PopupModalReducer,
+    CommentReducer,
 })
 export default rootReducer

@@ -9,6 +9,7 @@ export default function PopupModal() {
     const modalTag = useRef()
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         window.addEventListener('click', (e) => {
             if (e.target == modalTag.current) {
                 dispatch({ type: HIDE_MODAL })

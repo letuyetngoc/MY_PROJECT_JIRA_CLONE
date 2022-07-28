@@ -41,6 +41,16 @@
         margin: 0;
     }
 
+    .projectManagement__name {
+        transition: $smooth;
+        cursor: pointer;
+
+        &:hover {
+            color: $blue;
+            text-decoration: underline;
+        }
+    }
+
     .projectManagement__action {
         display: flex;
 
@@ -68,19 +78,20 @@
     }
 
     .projectManagement__table {
+        position: relative;
         overflow: hidden auto;
 
         .projectManagement__table-member {
             position: relative;
             display: inline-block;
 
-            &:hover {
-                .text_name {
-                    display: initial;
-                }
-            }
 
             .avatar {
+                &:hover {
+                    background-color: rgb(144, 145, 148);
+                    color: white;
+                }
+
                 width: 32px;
                 height: 32px;
                 line-height: 32px;
@@ -91,17 +102,72 @@
                 font-weight: 500;
                 background-color: rgb(235, 236, 240);
                 cursor: pointer;
+            }
+        }
+    }
+
+}
+
+.ant-popover-title {
+    text-align: center !important;
+}
+
+.table_hover {
+    display: inline-block;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
 
 
+
+    tr {
+        th {
+            width: 30%;
+        }
+
+        td {
+            vertical-align: center;
+
+            padding: 5px 0;
+
+            @include Responesive(SM) {
+                padding: 10px
             }
 
-            .text_name {
-                position: absolute;
-                top: -22px;
-                display: none;
-                width: 200px;
-                color: $blue;
+            border-top: 1px solid #dee2e6;
+
+            div {
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                border-radius: 100px;
+                margin: 2px;
+                color: $gray;
                 font-weight: 500;
+                background-color: rgb(235, 236, 240);
+                cursor: pointer;
+            }
+
+            button {
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                border-radius: 100px;
+                border: none;
+                margin: 2px;
+                color: $gray;
+                font-weight: 500;
+                background-color: rgb(241, 84, 89);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgb(241, 59, 65);
+
+                }
             }
         }
     }

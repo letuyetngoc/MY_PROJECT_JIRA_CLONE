@@ -1,0 +1,119 @@
+.block_comment-sent {
+    position: relative;
+    margin-top: 25px;
+
+    .block_comment-avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        width: 32px;
+        border-radius: 100%;
+        background-color: rgb(235, 236, 240);
+    }
+
+    .block_comment-content {
+        padding-left: 44px;
+
+        .content-edit {
+
+            textarea {
+                width: 100%;
+                overflow-y: hidden;
+                padding: 12px 16px;
+                border-radius: 4px;
+                border: 1px solid rgb(23, 43, 77);
+                color: rgb(137, 147, 164);
+                cursor: pointer;
+                user-select: none;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+
+            .textarea__btn {
+                display: flex;
+
+                button {
+
+                    &:nth-child(1) {
+                        margin-right: 6px;
+                        background-color: rgb(0, 94, 235);
+                        font-size: 14.5;
+                        border-radius: 3px;
+                        color: white;
+                        padding: 0 12px;
+                        border: none;
+                        cursor: pointer;
+                        height: 32px;
+
+                        &:hover {
+                            background-color: rgb(0, 94, 235);
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        margin-right: 6px;
+                        background-color: transparent;
+                        font-size: 14.5;
+                        border-radius: 3px;
+                        padding: 0 12px;
+                        border: none;
+                        cursor: pointer;
+                        height: 32px;
+
+                        &:hover {
+                            background-color: rgb(235, 236, 240);
+                        }
+                    }
+                }
+            }
+        }
+
+        .content-heading {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            div {
+                padding-right: 12px;
+                padding-bottom: 10px;
+                color: rgb(66, 82, 110);
+
+                &:nth-child(1) {
+                    font-weight: 500;
+                    font-size: 15px;
+                }
+
+                &:nth-child(2) {
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .content-body {
+            padding-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .content-funtion {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 14px;
+            color: rgb(66, 82, 110);
+
+            div {
+                padding-right: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

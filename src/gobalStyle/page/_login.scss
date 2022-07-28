@@ -79,6 +79,10 @@
             justify-content: center;
             align-items: center;
 
+            p {
+                margin: 0;
+            }
+
             button {
                 color: $blue;
                 text-decoration: underline;

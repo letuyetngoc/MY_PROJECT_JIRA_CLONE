@@ -1,13 +1,18 @@
 import React, { useEffect, useMemo } from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
 import DragAndDrop from '../../component/dragAndDrop/DragAndDrop';
+import { GET_PROJECT_DETAIL_BOARD_API } from '../../redux/saga/typesSaga/projectType';
 
-export default function Board() {
+export default function Board(props) {
+    const dispatch = useDispatch()
+
+    const { projectDetail } = useSelector(state => state.ProjectReducer)
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch({ type: GET_PROJECT_DETAIL_BOARD_API, payload: props.match.params.projectId })
     }, [])
 
     const userLogin = useMemo(() => {
@@ -21,10 +26,10 @@ export default function Board() {
     return (
         <div className='board'>
             <div className='board__heading'>
-                Projects  <span>/</span>  {userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board
+                Projects  <span>/</span>  {userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board  <span>/</span>  {projectDetail.projectName}
             </div>
             <div className='board__title'>
-                <p>{userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board</p>
+                <p>{projectDetail.projectName}</p>
                 <a target='blank' href='https://github.com/letuyetngoc/MY_PROJECT_JIRA_CLONE'>
                     <AiFillGithub className='icon' />
                     <span>Github Repo</span>
@@ -36,12 +41,16 @@ export default function Board() {
                     <input />
                 </div>
                 <div className='board__tabNav-avatar'>
-                    <div className='board__tabNav-avatar-item' style={{ backgroundImage: `url('https://picsum.photos/200')` }} onClick={handleActiveClass}>
-                    </div>
-                    <div className='board__tabNav-avatar-item ' style={{ backgroundImage: `url('https://picsum.photos/200')` }} onClick={handleActiveClass}>
-                    </div>
-                    <div className='board__tabNav-avatar-item' style={{ backgroundImage: `url('https://picsum.photos/200')` }} onClick={handleActiveClass}>
-                    </div>
+                    {projectDetail.members?.map(((member, index) => {
+                        return (
+                            <div key={index} className='board__tabNav-avatar-item' onClick={handleActiveClass}>
+                                <div className='avatar'>{member.name.slice(0, 1).toUpperCase()}</div>
+                                <div className='text_name' >
+                                    {member.name}
+                                </div>
+                            </div>
+                        )
+                    }))}
                 </div>
                 <div className='board__tabNav-menu'>
                     <div className='board__tabNav-menu-item' onClick={e => {
@@ -74,7 +83,7 @@ export default function Board() {
                 </div>
             </div>
             <div className='board__content'>
-                <DragAndDrop />
+                <DragAndDrop props={props} />
             </div>
         </div>
     )

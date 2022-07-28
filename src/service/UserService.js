@@ -16,5 +16,8 @@ class UserService extends BaseService {
     editUser = (data) => {
         return this.put('api/Users/editUser', data)
     }
+    getUserByProjectId = (projectId) => {
+        return this.get(`api/Users/getUserByProjectId?idProject=${projectId}`)
+    }
 }
 export const userService = new UserService()

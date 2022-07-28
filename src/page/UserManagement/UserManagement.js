@@ -14,6 +14,7 @@ import { GET_USER_ID } from '../../redux/types/UserTypes';
 import { MESSAGE_ALERT_APPEAR, MESSAGE_ALERT_DISAPPEAR } from '../../redux/types/MessageTypes';
 import AlertMessage from '../../component/message/AlertMessage';
 import EditUser from './EditUser';
+import SmallLoading from '../../component/loading/SmallLoading';
 
 const UserManagement = () => {
     const dispatch = useDispatch()
@@ -120,6 +121,7 @@ const UserManagement = () => {
                 </div>
                 <div className='userManagement__table'>
                     <Table columns={columns} dataSource={data} />
+                    <SmallLoading />
                 </div>
             </div>
         </>

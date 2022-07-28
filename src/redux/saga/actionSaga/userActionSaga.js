@@ -2,11 +2,11 @@ import React from 'react'
 
 import { call, put, takeLatest, delay } from "redux-saga/effects"
 import { userService } from "../../../service/UserService"
-import { GET_ALL_USER, GET_USER_LOGIN } from "../../types/UserTypes"
-import { DELETE_USER_API, EDIT_USER_API, GET_USER_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
+import { GET_ALL_USER, GET_USERS_BY_PROJECTID, GET_USER_LOGIN } from "../../types/UserTypes"
+import { DELETE_USER_API, EDIT_USER_API, GET_USER_API, GET_USER_BY_PROJECTID_API, SIGN_IN_API, SIGN_UP_API } from "../typesSaga/UserTypesSaga"
 import { history } from '../../../App'
 import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from '../../types/MessageTypes'
-import { APPEAR_LOADING, HIDE_LOADING } from '../../types/LoadingTypes'
+import { APPEAR_LOADING, APPEAR_SMALL_LOADING, HIDE_LOADING, HIDE_SMALL_LOADING } from '../../types/LoadingTypes'
 import { HIDE_MODAL } from '../../types/PopupModalTypes'
 
 function* signIn(action) {
@@ -67,7 +67,9 @@ export function* followSignUp() {
 
 function* getUserAction(action) {
     try {
+        yield put({ type: APPEAR_SMALL_LOADING })
         const { data, status } = yield call(() => userService.getUser(action.payload))
+        yield put({ type: HIDE_SMALL_LOADING })
         if (status === 200) {
             yield put({ type: GET_ALL_USER, payload: data.content })
         }
@@ -89,7 +91,10 @@ function* deleteUserAction(action) {
             yield put({ type: MESSAGE_DISAPPEAR })
         }
     } catch (error) {
+
         console.log('error', error)
+        yield put({ type: MESSAGE_APPEAR, payload: <p>{error.response.data.content}</p> })
+
     }
 }
 export function* followDeleteUserAction() {
@@ -112,4 +117,16 @@ function* editUserAction(action) {
 }
 export function* followEditUserAction() {
     yield takeLatest(EDIT_USER_API, editUserAction)
+}
+
+function* getUserByProjectIdAction(action) {
+    try {
+        const result = yield call(() => userService.getUserByProjectId(action.payload))
+        yield put({ type: GET_USERS_BY_PROJECTID, payload: result.data.content })
+    } catch (error) {
+        console.log('error', error)
+    }
+}
+export function* followGetUserByProjectIdAction() {
+    yield takeLatest(GET_USER_BY_PROJECTID_API, getUserByProjectIdAction)
 }

@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InputNumber, Slider, Select } from 'antd';
 import { Editor } from '@tinymce/tinymce-react';
 import { HIDE_MODAL } from '../../redux/types/PopupModalTypes';
-import { CREATE_TASK_API, GET_ALL_PRIORITY_API, GET_ALL_PROJECT_API, GET_ALL_STATUS_API, GET_ALL_TASK_TYPES_API } from '../../redux/saga/typesSaga/projectType';
-import { GET_USER_API } from '../../redux/saga/typesSaga/UserTypesSaga';
+import { CREATE_TASK_API, GET_ALL_PRIORITY_API, GET_ALL_PROJECT_API, GET_ALL_STATUS_API, GET_ALL_TASK_TYPES_API, GET_PROJECT_DETAIL_API, GET_PROJECT_DETAIL_BOARD_API } from '../../redux/saga/typesSaga/projectType';
 import { MESSAGE_APPEAR } from '../../redux/types/MessageTypes';
 
 export default function CreateTask() {
@@ -14,11 +13,10 @@ export default function CreateTask() {
     const editorRef = useRef(null);
 
     const [projectMembers, setProjectMember] = useState([])
-
     const { arrStatus, arrPriority, arrTaskTypes, arrProject } = useSelector(state => state.ProjectReducer)
 
     useEffect(() => {
-        dispatch({ type: GET_ALL_PROJECT_API })
+        dispatch({ type: GET_ALL_PROJECT_API, payload: '' })
         dispatch({ type: GET_ALL_STATUS_API })
         dispatch({ type: GET_ALL_PRIORITY_API })
         dispatch({ type: GET_ALL_TASK_TYPES_API })
@@ -32,9 +30,7 @@ export default function CreateTask() {
         }
     );
     const [values, setValues] = useState({
-        listUserAsign: [
-            0
-        ],
+        listUserAsign: [],
         taskName: '',
         description: '',
         statusId: '1',
@@ -54,16 +50,17 @@ export default function CreateTask() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log('values', values)
         if (editorRef.current) {
             values.description = editorRef.current.getContent()
             setValues({ ...values })
         }
-        console.log(values)
         if (values.taskName == '') {
             dispatch({ type: MESSAGE_APPEAR, payload: <p>Task name is required!</p> })
             return
         }
         dispatch({ type: CREATE_TASK_API, payload: values })
+        dispatch({ type: GET_PROJECT_DETAIL_BOARD_API, payload: values.projectId })
     }
     return (
         <div className='createTask'>
@@ -79,8 +76,9 @@ export default function CreateTask() {
                             setProjectMember(projectItem.members)
                             setValues({ ...values, projectId: projectItem.id })
                         }}>
-                            {arrProject.map((item, index) => <option value={JSON.stringify(item)}
-                                key={index}>{item.projectName}</option>)}
+                            {arrProject.map((item, index) => {
+                                return <option value={JSON.stringify(item)} key={index}>{item.projectName}</option>
+                            })}
                         </select>
                     </div>
                 </div>

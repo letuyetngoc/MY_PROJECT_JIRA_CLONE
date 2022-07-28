@@ -12,12 +12,12 @@ export default function MenuItem() {
     }, [])
 
     let menuItemArr = [
-        {
-            id: 0,
-            icon: <FiClipboard />,
-            content: `${userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} board`,
-            link: '/board'
-        },
+        // {
+        //     id: 0,
+        //     icon: <FiClipboard />,
+        //     content: `${userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} board`,
+        //     link: '/board'
+        // },
         {
             id: 1,
             icon: <AiOutlineSetting />,
