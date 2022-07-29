@@ -114,13 +114,13 @@ function DragAndDrop({ props }) {
 
 
     return (
-        <div style={{ display: "flex", justifyContent: 'space-between', height: "100%", width: '100%' }}>
+        <div className="dragAndDrop" style={{ display: "flex", justifyContent: 'space-between', height: "100%", width: '100%' }}>
             <DragDropContext
                 onDragEnd={result => onDragEnd(result, columns, setColumns)}
             >
                 {Object.entries(columns).map(([columnId, column], index) => {
                     return (
-                        <div
+                        <div className="dragAndDrop__column"
                             style={{
                                 display: "flex",
                                 flexDirection: 'column',

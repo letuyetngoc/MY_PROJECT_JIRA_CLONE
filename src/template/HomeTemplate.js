@@ -23,7 +23,8 @@ export default function HomeTemplate(props) {
         <Route {...restProps} render={(propsRout) => {
             return (
                 <div className='hometemplate'>
-                    <div className='hometemplate__nav'>
+                    {/* <div className='hometemplate__nav'>
+
                         <div className='hometemplate__nav-logo'>
                             <a>
                                 <AiOutlineHome className='icon' />
@@ -41,7 +42,7 @@ export default function HomeTemplate(props) {
                             <BsQuestionCircle className='icon' />
                             <div>ABOUT</div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='homeTemplate__navContent'>
                         <div className='homeTemplate__navContent-header' >
                             <div className='logo'>{userLogin.name.slice(0, 1).toUpperCase()}</div>

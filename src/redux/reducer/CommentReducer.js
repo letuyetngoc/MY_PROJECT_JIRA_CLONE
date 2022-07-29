@@ -1,7 +1,8 @@
-import { GET_ALL_COMMENTS } from "../types/CommentTypeReducer"
+import { GET_ALL_COMMENTS, GET_TIME_SINCE_COMMENT_CREATION, INSERT_COMMENT } from "../types/CommentTypeReducer"
 
 const stateDefault = {
-    arrAllComment: []
+    arrAllComment: [],
+    commentInserted: {},
 }
 const CommentReducer = (state = stateDefault, action) => {
     switch (action.type) {

@@ -1,7 +1,10 @@
 .createTask {
+    padding: 10px 0;
+
     .createTask__heading {
         font-size: 21px;
         padding-bottom: 15px;
+        padding-left: 5px;
         color: rgb(23, 43, 77);
     }
 
@@ -10,9 +13,18 @@
         justify-content: space-around;
         margin-top: 20px;
 
+        &:nth-child(6) {
+            display: flex;
+
+            @include Responesive(SM) {
+                display: block;
+            }
+        }
+
         &:nth-child(8) {
             justify-content: flex-end !important;
         }
+
 
         .btn {
             margin-top: 30px;
@@ -79,6 +91,10 @@
 
                 &:focus-visible {
                     outline: none;
+                }
+
+                option {
+                    width: 100%
                 }
 
             }

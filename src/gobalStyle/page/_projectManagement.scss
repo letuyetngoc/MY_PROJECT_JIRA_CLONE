@@ -5,6 +5,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 15px;
+        width: 100%;
 
         input {
             width: 100%;
@@ -34,79 +35,91 @@
     }
 
     h2 {
-        padding: 15px 15px 15px 0;
+        padding: 0px 15px 30px 0;
         font-size: 24px;
         font-weight: 500;
         color: rgb(23, 43, 77);
         margin: 0;
-    }
 
-    .projectManagement__name {
-        transition: $smooth;
+        @include Responesive(XS) {
+            padding-top: 0;
+            font-size: 21px;
+        }
+
+        @include Responesive(SS) {
+            padding-top: 10px;
+            font-size: 16px;
+        }
+    }
+}
+
+.projectManagement__name {
+    transition: $smooth;
+    cursor: pointer;
+
+    &:hover {
+        color: $blue;
+        text-decoration: underline;
+    }
+}
+
+.projectManagement__action {
+    display: flex;
+
+    div {
         cursor: pointer;
+        transition: $smooth;
+        color: white;
+        font-size: 20px;
+
+        &:nth-child(1) {
+            color: rgb(0, 82, 204);
+            margin-right: 6px;
+        }
+
+        &:nth-child(2) {
+            color: red;
+
+        }
 
         &:hover {
-            color: $blue;
-            text-decoration: underline;
-        }
-    }
-
-    .projectManagement__action {
-        display: flex;
-
-        div {
-            cursor: pointer;
+            transform: scale(1.1);
             transition: $smooth;
-            color: white;
-            font-size: 20px;
-
-            &:nth-child(1) {
-                color: rgb(0, 82, 204);
-                margin-right: 6px;
-            }
-
-            &:nth-child(2) {
-                color: red;
-
-            }
-
-            &:hover {
-                transform: scale(1.1);
-                transition: $smooth;
-            }
         }
     }
-
-    .projectManagement__table {
-        position: relative;
-        overflow: hidden auto;
-
-        .projectManagement__table-member {
-            position: relative;
-            display: inline-block;
-
-
-            .avatar {
-                &:hover {
-                    background-color: rgb(144, 145, 148);
-                    color: white;
-                }
-
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
-                text-align: center;
-                border-radius: 100px;
-                margin: 2px;
-                color: $gray;
-                font-weight: 500;
-                background-color: rgb(235, 236, 240);
-                cursor: pointer;
-            }
-        }
-    }
-
 }
+
+.projectManagement__table {
+    position: relative;
+    overflow: auto hidden;
+    width: 100%;
+
+    .projectManagement__table-member {
+        position: relative;
+        display: inline-block;
+
+
+        .avatar {
+            &:hover {
+                background-color: rgb(144, 145, 148);
+                color: white;
+            }
+
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 100px;
+            margin: 2px;
+            color: $gray;
+            font-weight: 500;
+            background-color: rgb(235, 236, 240);
+            cursor: pointer;
+        }
+    }
+}
+
+
 
 .ant-popover-title {
     text-align: center !important;
@@ -118,9 +131,9 @@
     width: 100%;
     text-align: center;
 
-
-
     tr {
+        width: 100%;
+
         th {
             width: 30%;
         }
@@ -171,4 +184,9 @@
             }
         }
     }
+}
+
+.ant-popover-inner {
+    width: 90%;
+    margin: 0 auto;
 }

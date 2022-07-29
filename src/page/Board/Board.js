@@ -52,7 +52,7 @@ export default function Board(props) {
                         )
                     }))}
                 </div>
-                <div className='board__tabNav-menu'>
+                {/* <div className='board__tabNav-menu'>
                     <div className='board__tabNav-menu-item' onClick={e => {
                         e.target.classList.toggle('active')
                         document.querySelector('.clear').classList.toggle('show')
@@ -80,7 +80,7 @@ export default function Board(props) {
                     }}>
                         <span>|</span>Clear All
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className='board__content'>
                 <DragAndDrop props={props} />

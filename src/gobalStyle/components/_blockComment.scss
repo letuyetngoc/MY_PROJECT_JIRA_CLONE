@@ -12,10 +12,20 @@
         width: 32px;
         border-radius: 100%;
         background-color: rgb(235, 236, 240);
+
+        @include Responesive(XS) {
+            position: initial;
+            display: block;
+        }
     }
 
     .block_comment-content {
         padding-left: 44px;
+
+        @include Responesive(XS) {
+            padding-left: 0;
+            padding-top: 5px;
+        }
 
         .content-edit {
 
@@ -77,6 +87,10 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
+
+            @include Responesive(XS) {
+                display: block;
+            }
 
             div {
                 padding-right: 12px;

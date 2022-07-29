@@ -1,15 +1,16 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects"
-import TaskDetail from "../../../page/TaskDetail/TaskDetail"
 import { commentService } from "../../../service/CommentService"
-import { GET_ALL_COMMENTS } from "../../types/CommentTypeReducer"
-import { MESSAGE_ALERT_APPEAR, MESSAGE_ALERT_DISAPPEAR, MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../../types/MessageTypes"
+import { GET_ALL_COMMENTS, INSERT_COMMENT } from "../../types/CommentTypeReducer"
+import { MESSAGE_APPEAR, MESSAGE_DISAPPEAR } from "../../types/MessageTypes"
 import { DELETE_COMMENT_API, GET_ALL_COMMENTS_API, INSERT_COMMENT_API, UPDATE_COMMENT_API } from "../typesSaga/commentTypes"
 
 function* insertCommentAction(action) {
     try {
         const result = yield call(() => commentService.insertComment(action.payload))
-        console.log('result', result)
+        // console.log('insert', result)
+        localStorage.setItem(`itemMoment${result.data.content.id}`, result.data.dateTime)
         yield put({ type: GET_ALL_COMMENTS_API, payload: action.payload.taskId })
+
     } catch (error) {
         console.log('error', error)
     }
@@ -33,6 +34,8 @@ export function* followGetAllCommentAction() {
 function* deleteCommentAction(action) {
     try {
         const result = yield call(() => commentService.deleteComment(action.payload.id))
+        localStorage.removeItem(`itemMoment${action.payload.id}`)
+
         yield put({ type: MESSAGE_APPEAR, payload: <p>Delete successfully!</p> })
         yield delay(1000)
         yield put({ type: MESSAGE_DISAPPEAR })

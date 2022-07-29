@@ -113,7 +113,7 @@ const UserManagement = () => {
                 <p> Are you sure to delete this user?</p>
             </AlertMessage>
             <div className='userManagement'>
-                <button onClick={() => dispatch({ type: APPEAR_MODAL, payload: <CreateUser /> })}>Create user</button>
+                {/* <button onClick={() => dispatch({ type: APPEAR_MODAL, payload: <CreateUser /> })}>Create user</button> */}
                 <h2>User management</h2>
                 <div className='userManagement__search'>
                     <input onChange={e => handleChangeInput(e.target.value)} placeholder='Enter user name to search' />

@@ -2,11 +2,14 @@ import React, { useMemo } from 'react'
 import { AiOutlineSetting } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineSolution } from "react-icons/ai";
-import { FiClipboard } from "react-icons/fi";
+import { AiOutlinePlus } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { APPEAR_MODAL } from '../../redux/types/PopupModalTypes';
+import CreateTask from '../../page/CreateTask/CreateTask';
 
 export default function MenuItem() {
-
+    const dispatch = useDispatch()
     const userLogin = useMemo(() => {
         return JSON.parse(localStorage.getItem('userLogin'))
     }, [])
@@ -39,19 +42,28 @@ export default function MenuItem() {
     ]
 
     return (
-        menuItemArr.map((menuItem, index) => {
-            return (
-                <NavLink key={index} to={menuItem.link} className='menuItem' activeClassName='menuItem active'>
-                    <div className='icon'>
-                        {menuItem.icon}
-                    </div>
-                    <div >
-                        {menuItem.content}
-                    </div>
-                </NavLink>
-            )
-        })
+        <>
+            < div onClick={() => { dispatch({ type: APPEAR_MODAL, payload: <CreateTask /> }) }
+            } className='menuItem' >
+                <div className='icon'>
+                    <AiOutlinePlus />
+                </div>
+                <div >Create task</div>
+            </div >
+            {menuItemArr.map((menuItem, index) => {
+                return (
+                    <NavLink key={index} to={menuItem.link} className='menuItem' activeClassName='menuItem active'>
+                        <div className='icon'>
+                            {menuItem.icon}
+                        </div>
+                        <div >
+                            {menuItem.content}
+                        </div>
 
+                    </NavLink>
+                )
+            })}
 
+        </>
     )
 }

@@ -1,4 +1,6 @@
 .taskDetail {
+    padding: 10px 5px;
+
     .taskDetail__button_update {
         margin-top: 30px;
         padding: 0 12px;
@@ -32,6 +34,11 @@
                 &:focus-visible {
                     outline: none;
                 }
+
+                option {
+                    width: 100%;
+                }
+
             }
 
         }
@@ -77,6 +84,11 @@
         .taskDetail__content-left {
             width: 65%;
             margin: 0 10px;
+
+            @include Responesive(SS) {
+                width: 55%;
+                margin: 0;
+            }
 
             .taskDetail__content-title {
                 padding: 7px 0px;
@@ -151,10 +163,20 @@
                         width: 32px;
                         border-radius: 100%;
                         background-color: rgb(235, 236, 240);
+
+                        @include Responesive(XS) {
+                            position: initial;
+                            display: block;
+                        }
                     }
 
                     .content {
                         padding-left: 44px;
+
+                        @include Responesive(XS) {
+                            padding-left: 0;
+                            padding-top: 5px;
+                        }
 
                         textarea {
                             width: 100%;
@@ -201,7 +223,7 @@
                         button {
 
                             &:nth-child(1) {
-                                margin-right: 6px;
+                                margin-right: 2px;
                                 background-color: rgb(0, 94, 235);
                                 font-size: 14.5;
                                 border-radius: 3px;
@@ -217,7 +239,7 @@
                             }
 
                             &:nth-child(2) {
-                                margin-right: 6px;
+                                margin-right: 0;
                                 background-color: transparent;
                                 font-size: 14.5;
                                 border-radius: 3px;
@@ -363,8 +385,13 @@
         width: 35%;
         margin: 0 10px;
 
-        .taskDetail__content-right-item {
+        @include Responesive(SS) {
+            width: 45%;
+            margin-right: 0;
+            margin-left: 5px;
+        }
 
+        .taskDetail__content-right-item {
 
             .user {
                 width: 100px;
@@ -401,6 +428,7 @@
             }
 
             select {
+                width: 100%;
                 font-size: 12px;
                 padding: 0px 12px;
                 height: 32px;
@@ -409,6 +437,13 @@
                 border-radius: 4px;
                 cursor: pointer;
                 transition: $smooth;
+
+                option {
+                    width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
 
                 &:focus-visible {
                     outline: 1px solid $blue;
@@ -446,6 +481,10 @@
             .time_tracking-input {
                 display: flex;
                 justify-content: space-between;
+
+                @include Responesive(XS) {
+                    display: block;
+                }
 
                 .time_tracking-input-item {
                     label {

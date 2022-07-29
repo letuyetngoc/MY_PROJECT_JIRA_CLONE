@@ -11,6 +11,11 @@
 
     .board__title {
         margin-top: 6px;
+
+        @include Responesive(SM) {
+            margin-top: 30px;
+        }
+
         display: flex;
         justify-content: space-between;
 
@@ -23,6 +28,12 @@
 
         a {
             margin-right: 100px;
+
+            @include Responesive(SM) {
+                margin-right: 0;
+
+            }
+
             color: rgb(66, 82, 110);
             font-size: 14.5px;
             display: flex;
@@ -51,6 +62,11 @@
     .board__tabNav {
         margin-top: 24px;
         display: flex;
+
+        @include Responesive(SS) {
+            display: block;
+        }
+
         justify-content: flex-start;
         align-items: center;
 
@@ -92,7 +108,9 @@
             margin-right: 12px;
             position: relative;
 
-
+            @include Responesive(SS) {
+                margin-top: 15px;
+            }
 
             .board__tabNav-avatar-item {
                 &:hover {
@@ -188,27 +206,28 @@
     }
 
     .board__content {
-        margin-top: 26px;
-        display: flex;
-        justify-content: space-between;
+        // margin-top: 26px;
+        // display: flex;
+        // justify-content: space-between;
+        overflow: auto hidden;
 
-        .board__content-item {
-            display: flex;
-            flex-direction: column;
+        // .board__content-item {
+        //     display: flex;
+        //     flex-direction: column;
 
-            background-color: $light-gray;
-            min-height: 400px;
-            width: 25%;
-            margin: 0 5px;
-            border-radius: 3px;
+        //     background-color: $light-gray;
+        //     min-height: 400px;
+        //     width: 25%;
+        //     margin: 0 5px;
+        //     border-radius: 3px;
 
-            .board__content-item-heading {
-                padding: 10px 10px 17px;
-                font-size: 12.5px;
-                color: rgb(94, 108, 132);
-                font-weight: 500;
-            }
-        }
+        //     .board__content-item-heading {
+        //         padding: 10px 10px 17px;
+        //         font-size: 12.5px;
+        //         color: rgb(94, 108, 132);
+        //         font-weight: 500;
+        //     }
+        // }
     }
 
 }

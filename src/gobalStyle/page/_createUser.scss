@@ -30,6 +30,10 @@
                 background: rgb(244, 245, 247);
                 font-family: CircularStdBook;
                 font-size: 15px;
+
+                &:focus-visible {
+                    outline: none;
+                }
             }
 
             button {

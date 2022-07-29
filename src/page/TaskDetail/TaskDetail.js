@@ -15,10 +15,10 @@ import { GET_USER_BY_PROJECTID_API } from '../../redux/saga/typesSaga/UserTypesS
 import { REMOVE_TASK_API, UPDATE_TASK_API } from '../../redux/saga/typesSaga/projectType';
 import { MESSAGE_ALERT_APPEAR, MESSAGE_ALERT_DISAPPEAR } from '../../redux/types/MessageTypes';
 import AlertMessage from '../../component/message/AlertMessage';
-import { DELETE_COMMENT_API, GET_ALL_COMMENTS_API, INSERT_COMMENT_API, UPDATE_COMMENT_API } from '../../redux/saga/typesSaga/commentTypes';
+import { GET_ALL_COMMENTS_API, INSERT_COMMENT_API } from '../../redux/saga/typesSaga/commentTypes';
 import { useMemo } from 'react';
 import BlockComment from '../../component/comment/BlockComment';
-
+import moment from 'moment';
 
 export default function TaskDetail({ taskDetail }) {
 
@@ -29,6 +29,9 @@ export default function TaskDetail({ taskDetail }) {
     const user = useMemo(() => {
         return JSON.parse(localStorage.getItem('userLogin'))
     }, [])
+
+
+
 
     const [showEdit, setShowEdit] = useState(false)
     const [textarea, setTextarea] = useState(false)
@@ -101,6 +104,7 @@ export default function TaskDetail({ taskDetail }) {
         console.log('state', state)
         dispatch({ type: UPDATE_TASK_API, payload: state })
     }
+
     return (
         <div className='taskDetail'>
             <AlertMessage onOk={onOk} onCancle={onCancel} >
@@ -121,14 +125,14 @@ export default function TaskDetail({ taskDetail }) {
                         <div>Task: {taskDetail.taskId}</div>
                     </div>
                     <div className='taskDetail__heading-right'>
-                        <div className='taskDetail__heading-item'>
+                        {/* <div className='taskDetail__heading-item'>
                             <IoPaperPlaneOutline />
                             <div>Give feedback</div>
                         </div>
                         <div className='taskDetail__heading-item'>
                             <FiLink />
                             <div>Copy link</div>
-                        </div>
+                        </div> */}
                         <div onClick={() => {
                             dispatch({ type: MESSAGE_ALERT_APPEAR })
 
@@ -204,9 +208,11 @@ export default function TaskDetail({ taskDetail }) {
                                         <div className='textarea__btn'>
                                             <button onClick={(e) => {
                                                 e.preventDefault()
+
                                                 dispatch({ type: INSERT_COMMENT_API, payload: { taskId: taskDetail.taskId, contentComment: comment } })
                                                 setTextarea(false)
                                                 setInputComment(true)
+
                                             }}>Save</button>
                                             <button onClick={() => {
                                                 setTextarea(false)
@@ -341,11 +347,11 @@ export default function TaskDetail({ taskDetail }) {
                         </div>
                         <br />
                         <hr />
-                        <br />
-                        <div className='taskDetail__content-right-item'>
+                        {/* <br /> */}
+                        {/* <div className='taskDetail__content-right-item'>
                             <p>Created at 18 days ago</p>
                             <p>Updated at 4 hours ago</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <button type='submit' onClick={handleSubmit} className='taskDetail__button_update'>Update project</button>

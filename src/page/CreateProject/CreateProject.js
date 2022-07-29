@@ -46,7 +46,7 @@ export default function CreateProject() {
 
             <form>
                 <div className='createProject__heading'>
-                    Projects  <span>/</span>  {userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board  <span>/</span>  Create Project
+                    {userLogin.name[0].toUpperCase() + userLogin.name.slice(1)} Board  <span>/</span>  Create Project
                     <div>Create Project</div>
                 </div>
                 <div className='createProject__item'>

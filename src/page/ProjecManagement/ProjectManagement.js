@@ -165,7 +165,7 @@ const ProjectManagement = () => {
             projectName: project.projectName,
             category: project.categoryName,
             creator: project.creator.name,
-            members: <div>
+            members: <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 {project.members.slice(0, 2).map((member) => <Popover content={content} title="Members" key={member.userId}>
                     <div className='projectManagement__table-member'>
                         <div className='avatar'>
